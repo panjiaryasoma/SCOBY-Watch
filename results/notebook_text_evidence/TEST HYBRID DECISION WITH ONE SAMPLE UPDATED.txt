@@ -1,0 +1,8 @@
+{'rule_status': 'balanced',
+ 'ml_status': 'balanced',
+ 'ml_confidence': 0.999820415147993,
+ 'final_status': 'balanced',
+ 'decision_reason': 'Rule-based and ML model agree on the same fermentation status.',
+ 'rule_triggered': 'R10_balanced_ready_window',
+ 'risk_flag': 'normal',
+ 'recommendation': 'Start taste testing and consider bottling if the flavor matches preference.'}

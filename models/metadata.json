@@ -1,0 +1,41 @@
+{
+  "best_model": "Gradient Boosting",
+  "random_state": 42,
+  "split": {
+    "method": "GroupShuffleSplit",
+    "n_splits": 1,
+    "test_size": 0.2,
+    "train_rows": 3920,
+    "test_rows": 980,
+    "train_batches": 280,
+    "test_batches": 70,
+    "batch_overlap": 0
+  },
+  "features": [
+    "recipe_id_encoded",
+    "tea_type_encoded",
+    "sugar_g_per_l",
+    "starter_ml",
+    "water_volume_l",
+    "day",
+    "room_temp_c",
+    "humidity_percent",
+    "ph",
+    "brix"
+  ],
+  "target_classes": [
+    "balanced",
+    "manual_check",
+    "still_sweet",
+    "temperature_warning",
+    "too_early",
+    "too_sour"
+  ],
+  "metrics": {
+    "Model": "Gradient Boosting",
+    "Accuracy": 0.9959183673469387,
+    "Precision": 0.9959582857533257,
+    "Recall": 0.9959183673469387,
+    "F1-Score": 0.9959214738186376
+  }
+}

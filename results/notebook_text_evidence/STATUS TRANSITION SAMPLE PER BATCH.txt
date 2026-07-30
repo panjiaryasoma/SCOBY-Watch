@@ -1,0 +1,180 @@
+================================================================================
+Batch: KB-R1-001
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        25.86 4.52 10.19       too_early             R3_early_acidity_stage
+   2        24.34 4.49  9.63       too_early             R3_early_acidity_stage
+   3        25.97 4.24  9.06       too_early             R3_early_acidity_stage
+   4        25.82 4.34  9.44       too_early             R3_early_acidity_stage
+   5        26.39 3.98  9.22     still_sweet        R6_sweet_fermentation_stage
+   6        26.51 3.82  8.51     still_sweet        R6_sweet_fermentation_stage
+   7        25.90 3.74  8.29     still_sweet        R6_sweet_fermentation_stage
+   8        25.35 3.81  8.14     still_sweet        R6_sweet_fermentation_stage
+   9        26.46 3.41  6.93        balanced          R10_balanced_ready_window
+  10        26.88 3.25  6.76        balanced          R10_balanced_ready_window
+  11        25.45 3.25  6.90        balanced          R10_balanced_ready_window
+  12        26.97 3.06  6.07    manual_check             R8_ambiguous_condition
+  13        25.16 2.93  5.75        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        27.18 2.86  5.57        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-002
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        27.01 4.52  9.37       too_early             R3_early_acidity_stage
+   2        26.78 4.49  9.36       too_early             R3_early_acidity_stage
+   3        26.34 4.33  9.16       too_early             R3_early_acidity_stage
+   4        26.55 4.15  8.90    manual_check          R9_early_day_manual_check
+   5        26.42 3.99  7.72        balanced              R7_balanced_but_early
+   6        27.17 3.89  7.63        balanced              R7_balanced_but_early
+   7        25.88 3.74  7.01        balanced          R10_balanced_ready_window
+   8        26.82 3.77  6.85        balanced          R10_balanced_ready_window
+   9        27.14 3.37  6.34        balanced          R10_balanced_ready_window
+  10        26.99 3.37  5.98        balanced          R10_balanced_ready_window
+  11        26.92 3.34  5.67        balanced          R10_balanced_ready_window
+  12        27.54 3.23  4.57        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        27.39 2.93  4.37        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        27.02 2.77  4.10        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-003
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        22.89 4.55  8.56       too_early             R3_early_acidity_stage
+   2        24.18 4.35  7.80       too_early             R3_early_acidity_stage
+   3        22.08 4.35  7.07       too_early             R3_early_acidity_stage
+   4        23.62 4.17  7.04    manual_check          R9_early_day_manual_check
+   5        23.29 4.13  6.65        balanced              R7_balanced_but_early
+   6        23.71 3.89  5.38        balanced              R7_balanced_but_early
+   7        23.74 3.87  5.46        balanced          R10_balanced_ready_window
+   8        22.51 3.64  4.41        too_sour R4_R5_over_acidic_or_low_sweetness
+   9        23.82 3.71  4.26        too_sour R4_R5_over_acidic_or_low_sweetness
+  10        25.21 3.42  3.56        too_sour R4_R5_over_acidic_or_low_sweetness
+  11        22.44 3.42  2.99        too_sour R4_R5_over_acidic_or_low_sweetness
+  12        23.07 3.28  2.72        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        23.95 3.14  1.80        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        23.69 3.14  1.95        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-004
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        27.50 4.76 11.47       too_early             R3_early_acidity_stage
+   2        27.54 4.68 10.08       too_early             R3_early_acidity_stage
+   3        26.88 4.44  9.39       too_early             R3_early_acidity_stage
+   4        26.75 4.54  8.47       too_early             R3_early_acidity_stage
+   5        27.63 4.22  8.92       too_early             R3_early_acidity_stage
+   6        27.16 4.09  8.37     still_sweet        R6_sweet_fermentation_stage
+   7        26.57 4.02  7.54        balanced          R10_balanced_ready_window
+   8        28.72 3.76  7.36        balanced          R10_balanced_ready_window
+   9        26.62 3.73  6.84        balanced          R10_balanced_ready_window
+  10        27.49 3.58  6.35        balanced          R10_balanced_ready_window
+  11        26.76 3.67  6.14        balanced          R10_balanced_ready_window
+  12        26.17 3.58  5.90        balanced          R10_balanced_ready_window
+  13        25.98 3.40  4.95        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        27.45 3.13  4.71        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-005
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        24.54 4.85  9.00       too_early             R3_early_acidity_stage
+   2        24.34 4.77  8.32       too_early             R3_early_acidity_stage
+   3        23.07 4.58  8.48       too_early             R3_early_acidity_stage
+   4        25.01 4.55  7.37       too_early             R3_early_acidity_stage
+   5        24.13 4.48  6.82       too_early             R3_early_acidity_stage
+   6        24.03 4.38  6.95       too_early             R3_early_acidity_stage
+   7        24.77 4.17  6.33        balanced          R10_balanced_ready_window
+   8        24.91 3.98  5.26        balanced          R10_balanced_ready_window
+   9        23.99 4.12  5.05        balanced          R10_balanced_ready_window
+  10        24.19 3.91  5.02        balanced          R10_balanced_ready_window
+  11        24.10 3.79  4.55        too_sour R4_R5_over_acidic_or_low_sweetness
+  12        24.29 3.83  4.17        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        23.15 3.68  3.05        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        25.07 3.45  2.96        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-006
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        24.57 4.56  8.29       too_early             R3_early_acidity_stage
+   2        23.30 4.41  7.76       too_early             R3_early_acidity_stage
+   3        24.61 4.39  7.38       too_early             R3_early_acidity_stage
+   4        24.37 4.20  6.94    manual_check          R9_early_day_manual_check
+   5        24.62 4.11  7.09        balanced              R7_balanced_but_early
+   6        24.30 3.99  6.11        balanced              R7_balanced_but_early
+   7        24.55 3.81  5.60        balanced          R10_balanced_ready_window
+   8        24.40 3.78  5.73        balanced          R10_balanced_ready_window
+   9        26.00 3.61  5.10        balanced          R10_balanced_ready_window
+  10        26.02 3.36  4.47        too_sour R4_R5_over_acidic_or_low_sweetness
+  11        22.79 3.23  4.29        too_sour R4_R5_over_acidic_or_low_sweetness
+  12        24.64 3.22  3.68        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        23.71 2.93  4.00        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        25.27 2.77  3.46        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-007
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix     expected_status              rule_triggered
+   1        31.49 4.45  9.92 temperature_warning R1_high_temperature_warning
+   2        31.66 4.52  9.56 temperature_warning R1_high_temperature_warning
+   3        31.03 4.41  9.31 temperature_warning R1_high_temperature_warning
+   4        32.42 4.20  9.06 temperature_warning R1_high_temperature_warning
+   5        31.38 3.95  8.68 temperature_warning R1_high_temperature_warning
+   6        31.92 3.80  7.19 temperature_warning R1_high_temperature_warning
+   7        32.34 3.66  7.24 temperature_warning R1_high_temperature_warning
+   8        29.63 3.62  6.95            balanced   R10_balanced_ready_window
+   9        31.51 3.44  6.05 temperature_warning R1_high_temperature_warning
+  10        30.01 3.26  5.94 temperature_warning R1_high_temperature_warning
+  11        30.18 3.08  4.75 temperature_warning R1_high_temperature_warning
+  12        31.63 2.92  5.18 temperature_warning R1_high_temperature_warning
+  13        31.02 2.76  3.79 temperature_warning R1_high_temperature_warning
+  14        30.84 2.63  3.53 temperature_warning R1_high_temperature_warning
+================================================================================
+Batch: KB-R1-008
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        24.92 4.69  8.20       too_early             R3_early_acidity_stage
+   2        23.36 4.68  8.27       too_early             R3_early_acidity_stage
+   3        24.90 4.47  8.19       too_early             R3_early_acidity_stage
+   4        25.92 4.24  6.28       too_early             R3_early_acidity_stage
+   5        25.24 4.07  6.06        balanced              R7_balanced_but_early
+   6        24.27 4.09  5.75        balanced              R7_balanced_but_early
+   7        26.19 3.82  5.70        balanced          R10_balanced_ready_window
+   8        25.49 3.73  4.47        too_sour R4_R5_over_acidic_or_low_sweetness
+   9        24.05 3.74  3.81        too_sour R4_R5_over_acidic_or_low_sweetness
+  10        25.51 3.43  3.54        too_sour R4_R5_over_acidic_or_low_sweetness
+  11        24.44 3.27  3.29        too_sour R4_R5_over_acidic_or_low_sweetness
+  12        25.05 3.12  2.53        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        25.65 2.97  2.23        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        25.65 2.94  1.50        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-009
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        21.99 4.42  8.92       too_early             R3_early_acidity_stage
+   2        21.08 4.45  8.89       too_early             R3_early_acidity_stage
+   3        21.97 4.44  7.62       too_early             R3_early_acidity_stage
+   4        20.62 4.15  7.89    manual_check          R9_early_day_manual_check
+   5        22.58 4.02  7.16        balanced              R7_balanced_but_early
+   6        21.83 3.86  7.10        balanced              R7_balanced_but_early
+   7        22.17 3.78  6.45        balanced          R10_balanced_ready_window
+   8        22.10 3.72  5.92        balanced          R10_balanced_ready_window
+   9        19.72 3.44  5.24        balanced          R10_balanced_ready_window
+  10        21.40 3.43  5.58        balanced          R10_balanced_ready_window
+  11        21.46 3.26  4.95        too_sour R4_R5_over_acidic_or_low_sweetness
+  12        21.82 3.08  4.65        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        22.33 2.99  3.94        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        21.69 2.79  4.14        too_sour R4_R5_over_acidic_or_low_sweetness
+================================================================================
+Batch: KB-R1-010
+Recipe: R1 - Standard Black Tea
+ day  room_temp_c   ph  brix expected_status                     rule_triggered
+   1        25.97 4.57  9.93       too_early             R3_early_acidity_stage
+   2        25.72 4.40  9.87       too_early             R3_early_acidity_stage
+   3        26.62 4.08  9.92    manual_check          R9_early_day_manual_check
+   4        26.76 4.08  8.84    manual_check          R9_early_day_manual_check
+   5        26.83 3.92  8.77     still_sweet        R6_sweet_fermentation_stage
+   6        27.67 3.72  7.42        balanced              R7_balanced_but_early
+   7        26.56 3.69  6.72        balanced          R10_balanced_ready_window
+   8        27.81 3.45  6.44        balanced          R10_balanced_ready_window
+   9        25.42 3.35  5.87        balanced          R10_balanced_ready_window
+  10        25.69 3.33  5.69        balanced          R10_balanced_ready_window
+  11        25.53 3.05  4.47        too_sour R4_R5_over_acidic_or_low_sweetness
+  12        26.62 2.99  5.34        too_sour R4_R5_over_acidic_or_low_sweetness
+  13        27.50 2.72  5.07        too_sour R4_R5_over_acidic_or_low_sweetness
+  14        26.70 2.66  3.87        too_sour R4_R5_over_acidic_or_low_sweetness

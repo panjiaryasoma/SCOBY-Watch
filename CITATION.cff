@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: >-
+  If you use SCOBY Watch in research, education, or software development,
+  please cite this software using the metadata below.
+title: >-
+  SCOBY Watch: A Simulation-First IoT and Hybrid Decision Support Framework
+  for Kombucha Fermentation Readiness Assessment
+type: software
+authors:
+  - family-names: Soma
+    given-names: Panji Arya
+  - family-names: Nasrulloh
+    given-names: Anas
+version: 1.0.0
+license: MIT
+abstract: >-
+  SCOBY Watch is a simulation-first Internet of Things and hybrid
+  decision-support research prototype for kombucha fermentation readiness
+  assessment. It integrates synthetic fermentation data generation, a
+  deterministic rule engine, a supervised machine-learning baseline,
+  confidence-aware hybrid arbitration, a Flask inference API, MQTT,
+  Node-RED, Wokwi simulation, dashboard visualization, automated tests, and
+  reproducibility-oriented documentation. The project validates software
+  architecture and integration behavior before empirical fermentation data
+  and calibrated physical sensors are available.
+keywords:
+  - kombucha
+  - fermentation
+  - internet of things
+  - IoT
+  - machine learning
+  - decision support
+  - hybrid decision system
+  - synthetic data
+  - ESP32
+  - MQTT
+  - Node-RED
+  - Wokwi

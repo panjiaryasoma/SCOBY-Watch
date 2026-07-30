@@ -1,0 +1,19 @@
+Total batches: 350
+
+pH trend check:
+ph_trend_ok
+True    350
+
+Brix trend check:
+brix_trend_ok
+True    350
+
+Batches with suspicious pH trend:
+Empty DataFrame
+Columns: [batch_id, recipe_id, ph_slope, brix_slope, ph_trend_ok, brix_trend_ok]
+Index: []
+
+Batches with suspicious Brix trend:
+Empty DataFrame
+Columns: [batch_id, recipe_id, ph_slope, brix_slope, ph_trend_ok, brix_trend_ok]
+Index: []

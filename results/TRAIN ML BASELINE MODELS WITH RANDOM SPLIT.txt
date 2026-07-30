@@ -1,0 +1,88 @@
+TRAIN ML BASELINE MODELS WITH RANDOM SPLIT
+======================================================================
+Decision Tree
+======================================================================
+                     precision    recall  f1-score   support
+
+           balanced       0.99      1.00      1.00       224
+       manual_check       1.00      0.97      0.99       118
+        still_sweet       1.00      0.99      0.99        89
+temperature_warning       1.00      1.00      1.00        48
+          too_early       1.00      1.00      1.00       209
+           too_sour       1.00      1.00      1.00       292
+
+           accuracy                           1.00       980
+          macro avg       1.00      0.99      1.00       980
+       weighted avg       1.00      1.00      1.00       980
+
+======================================================================
+Random Forest
+======================================================================
+                     precision    recall  f1-score   support
+
+           balanced       1.00      1.00      1.00       224
+       manual_check       0.99      0.98      0.99       118
+        still_sweet       1.00      1.00      1.00        89
+temperature_warning       1.00      1.00      1.00        48
+          too_early       1.00      1.00      1.00       209
+           too_sour       1.00      1.00      1.00       292
+
+           accuracy                           1.00       980
+          macro avg       1.00      1.00      1.00       980
+       weighted avg       1.00      1.00      1.00       980
+
+======================================================================
+Gradient Boosting
+======================================================================
+                     precision    recall  f1-score   support
+
+           balanced       0.99      1.00      1.00       224
+       manual_check       1.00      0.97      0.99       118
+        still_sweet       1.00      1.00      1.00        89
+temperature_warning       1.00      1.00      1.00        48
+          too_early       1.00      1.00      1.00       209
+           too_sour       1.00      1.00      1.00       292
+
+           accuracy                           1.00       980
+          macro avg       1.00      1.00      1.00       980
+       weighted avg       1.00      1.00      1.00       980
+
+======================================================================
+KNN
+======================================================================
+                     precision    recall  f1-score   support
+
+           balanced       0.78      0.90      0.83       224
+       manual_check       0.57      0.44      0.50       118
+        still_sweet       0.79      0.62      0.69        89
+temperature_warning       0.86      0.77      0.81        48
+          too_early       0.84      0.87      0.85       209
+           too_sour       0.91      0.93      0.92       292
+
+           accuracy                           0.82       980
+          macro avg       0.79      0.76      0.77       980
+       weighted avg       0.81      0.82      0.81       980
+
+======================================================================
+Logistic Regression
+======================================================================
+                     precision    recall  f1-score   support
+
+           balanced       0.78      0.83      0.81       224
+       manual_check       0.59      0.48      0.53       118
+        still_sweet       0.76      0.60      0.67        89
+temperature_warning       0.85      0.96      0.90        48
+          too_early       0.92      0.97      0.94       209
+           too_sour       0.92      0.95      0.93       292
+
+           accuracy                           0.84       980
+          macro avg       0.80      0.80      0.80       980
+       weighted avg       0.83      0.84      0.83       980
+
+MODEL COMPARISON
+              Model  Accuracy  Precision   Recall  F1-Score
+      Random Forest  0.996939   0.996935 0.996939  0.996933
+  Gradient Boosting  0.996939   0.996960 0.996939  0.996924
+      Decision Tree  0.995918   0.995945 0.995918  0.995902
+Logistic Regression  0.837755   0.830011 0.837755  0.831765
+                KNN  0.816327   0.809739 0.816327  0.809824

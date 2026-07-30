@@ -1,0 +1,16 @@
+GROUP SHUFFLE SPLIT BY batch_id
+======================================================================
+Train shape: (3920, 10)
+Test shape: (980, 10)
+Train unique batch: 280
+Test unique batch: 70
+Overlapping batch_id: 0
+
+              Model  Accuracy  Precision   Recall  F1-Score
+  Gradient Boosting  0.995918   0.995958 0.995918  0.995921
+      Random Forest  0.994898   0.994934 0.994898  0.994890
+      Decision Tree  0.992857   0.992930 0.992857  0.992826
+Logistic Regression  0.824490   0.818069 0.824490  0.816906
+                KNN  0.803061   0.796012 0.803061  0.790718
+
+Best model: Gradient Boosting

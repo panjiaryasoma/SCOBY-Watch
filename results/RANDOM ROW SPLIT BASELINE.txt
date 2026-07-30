@@ -1,0 +1,19 @@
+INITIAL RANDOM-ROW ML BASELINE
+======================================================================
+Train shape: (3920, 10)
+Test shape: (980, 10)
+Train unique batch: 350
+Test unique batch: 334
+Overlapping batch_id: 334
+
+MODEL COMPARISON
+              Model  Accuracy  Precision   Recall  F1-Score
+      Random Forest  0.996939   0.996935 0.996939  0.996933
+  Gradient Boosting  0.996939   0.996960 0.996939  0.996924
+      Decision Tree  0.995918   0.995945 0.995918  0.995902
+Logistic Regression  0.837755   0.830011 0.837755  0.831765
+                KNN  0.816327   0.809739 0.816327  0.809824
+
+Best model: Random Forest
+
+Methodological note: the random-row split may place observations from the same batch in both train and test sets. It is retained only to reproduce the notebook's early baseline.

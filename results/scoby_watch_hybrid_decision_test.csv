@@ -1,0 +1,6 @@
+case_id,day,temp,ph,brix,rule_status,ml_status,ml_confidence,final_status,decision_reason,rule_triggered,risk_flag,recommendation
+TC-001,1,25.0,4.6,10.2,too_early,too_early,1.0,too_early,Rule-based and ML model agree on the same fermentation status.,R3_early_acidity_stage,normal,Continue fermentation and check again within 24 hours.
+TC-002,6,25.5,3.7,9.1,still_sweet,still_sweet,0.9996,still_sweet,Rule-based and ML model agree on the same fermentation status.,R6_sweet_fermentation_stage,normal,Continue fermentation or start taste testing.
+TC-003,8,25.2,3.5,6.4,balanced,balanced,0.9998,balanced,Rule-based and ML model agree on the same fermentation status.,R10_balanced_ready_window,normal,Start taste testing and consider bottling if the flavor matches preference.
+TC-004,12,26.0,2.8,4.5,too_sour,too_sour,1.0,too_sour,Rule-based and ML model agree on the same fermentation status.,R4_R5_over_acidic_or_low_sweetness,caution,The batch may be over-fermented. Consider using it as starter or dilute based on taste preference.
+TC-005,7,31.5,3.6,6.8,temperature_warning,temperature_warning,0.9997,temperature_warning,Rule-based temperature warning has priority over ML prediction.,R1_high_temperature_warning,warning,Move the batch to a cooler area and monitor closely.

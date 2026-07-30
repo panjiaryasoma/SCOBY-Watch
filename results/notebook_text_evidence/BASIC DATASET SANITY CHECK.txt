@@ -1,0 +1,68 @@
+Dataset shape: (4900, 16)
+
+Columns:
+['batch_id', 'recipe_id', 'recipe_name', 'tea_type', 'sugar_g_per_l', 'starter_ml', 'water_volume_l', 'day', 'room_temp_c', 'humidity_percent', 'ph', 'brix', 'expected_status', 'recommendation', 'rule_triggered', 'risk_flag']
+
+Missing values:
+0
+batch_id            0
+recipe_id           0
+recipe_name         0
+tea_type            0
+sugar_g_per_l       0
+starter_ml          0
+water_volume_l      0
+day                 0
+room_temp_c         0
+humidity_percent    0
+ph                  0
+brix                0
+expected_status     0
+recommendation      0
+rule_triggered      0
+risk_flag           0
+
+Duplicate rows:
+0
+
+Unique recipes: 7
+Unique batches: 350
+Unique days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+
+Rows per recipe:
+recipe_id
+R1    700
+R2    700
+R3    700
+R4    700
+R5    700
+R6    700
+R7    700
+
+Rows per batch summary:
+count    350.0
+mean      14.0
+std        0.0
+min       14.0
+25%       14.0
+50%       14.0
+75%       14.0
+max       14.0
+
+Status distribution:
+expected_status
+too_sour               1461
+balanced               1119
+too_early              1047
+manual_check            592
+still_sweet             444
+temperature_warning     237
+
+Status distribution percentage:
+expected_status
+too_sour               29.82
+balanced               22.84
+too_early              21.37
+manual_check           12.08
+still_sweet             9.06
+temperature_warning     4.84

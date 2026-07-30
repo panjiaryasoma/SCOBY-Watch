@@ -1,0 +1,51 @@
+name: Python Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python 3.12 on Ubuntu
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      MPLBACKEND: Agg
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+
+      - name: Verify imports
+        run: |
+          python -c "import flask, joblib, matplotlib, numpy, pandas, sklearn, scipy"
+          python -m compileall -q api src experiments tests
+
+      - name: Run automated tests
+        run: python -m pytest tests/ -q

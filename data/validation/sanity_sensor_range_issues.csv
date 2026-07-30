@@ -1,0 +1,9 @@
+check,count
+temp_below_15,0
+temp_above_35,0
+humidity_below_40,0
+humidity_above_90,0
+ph_below_2_4,0
+ph_above_5_0,0
+brix_below_1_5,0
+brix_above_14,0

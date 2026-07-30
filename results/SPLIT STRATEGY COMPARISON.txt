@@ -1,0 +1,38 @@
+RANDOM ROW SPLIT
+======================================================================
+Train shape: (3920, 10)
+Test shape: (980, 10)
+Train unique batch: 350
+Test unique batch: 334
+Overlapping batch_id: 334
+
+              Model  Accuracy  Precision   Recall  F1-Score
+      Random Forest  0.996939   0.996935 0.996939  0.996933
+  Gradient Boosting  0.996939   0.996960 0.996939  0.996924
+      Decision Tree  0.995918   0.995945 0.995918  0.995902
+Logistic Regression  0.837755   0.830011 0.837755  0.831765
+                KNN  0.816327   0.809739 0.816327  0.809824
+
+Best model: Random Forest
+
+GROUP SHUFFLE SPLIT BY batch_id
+======================================================================
+Train shape: (3920, 10)
+Test shape: (980, 10)
+Train unique batch: 280
+Test unique batch: 70
+Overlapping batch_id: 0
+
+              Model  Accuracy  Precision   Recall  F1-Score
+  Gradient Boosting  0.995918   0.995958 0.995918  0.995921
+      Random Forest  0.994898   0.994934 0.994898  0.994890
+      Decision Tree  0.992857   0.992930 0.992857  0.992826
+Logistic Regression  0.824490   0.818069 0.824490  0.816906
+                KNN  0.803061   0.796012 0.803061  0.790718
+
+Best model: Gradient Boosting
+
+INTERPRETATION
+======================================================================
+The random-row split is retained as an historical baseline. Rows from the same fermentation batch may appear in both subsets, creating a batch-leakage risk.
+The GroupShuffleSplit result is the authoritative evaluation used by the paper because every batch_id is assigned exclusively to either train or test.

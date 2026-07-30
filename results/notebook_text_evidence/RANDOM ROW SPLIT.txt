@@ -1,0 +1,11 @@
+RANDOM ROW SPLIT
+======================================================================
+Dataset shape: (4900, 16)
+Unique batch: 350
+Expected unique batch: 350
+Train shape: (3920, 10)
+Test shape: (980, 10)
+Train unique batch: 350
+Test unique batch: 334
+Overlapping batch_id: 334
+Warning: the random-row split contains batch overlap.

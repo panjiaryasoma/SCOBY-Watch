@@ -1,0 +1,10 @@
+{
+  "rows": 4900,
+  "columns": 16,
+  "missing_values": 0,
+  "duplicate_rows": 0,
+  "unique_recipes": 7,
+  "unique_batches": 350,
+  "minimum_rows_per_batch": 14,
+  "maximum_rows_per_batch": 14
+}

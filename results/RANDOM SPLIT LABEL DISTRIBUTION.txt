@@ -1,0 +1,8 @@
+                     train_distribution  test_distribution
+expected_status                                           
+balanced                       0.228316           0.228571
+manual_check                   0.120918           0.120408
+still_sweet                    0.090561           0.090816
+temperature_warning            0.048214           0.048980
+too_early                      0.213776           0.213265
+too_sour                       0.298214           0.297959

@@ -1,0 +1,3 @@
+Model loaded: GradientBoostingClassifier(random_state=42)
+Features: ['recipe_id_encoded', 'tea_type_encoded', 'sugar_g_per_l', 'starter_ml', 'water_volume_l', 'day', 'room_temp_c', 'humidity_percent', 'ph', 'brix']
+Available encoders: ['recipe_id', 'recipe_name', 'tea_type', 'risk_flag', 'expected_status']
