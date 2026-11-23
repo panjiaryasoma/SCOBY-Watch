@@ -1,0 +1,5 @@
+row_index,batch_id,day,ph,brix,room_temp_c,humidity_percent,rule_label,ml_label,ml_confidence,hybrid_final,rule_triggered
+781,KB-R2-006,12,3.19,8.46,26.63,65.12,manual_check,still_sweet,0.8614169260541761,manual_check,R8_ambiguous_condition
+1312,KB-R2-044,11,3.19,8.99,23.19,67.88,manual_check,still_sweet,0.8897103017282455,manual_check,R8_ambiguous_condition
+4121,KB-R6-045,6,4.2,8.16,27.99,73.61,still_sweet,too_early,0.7429576217965075,manual_check,R6_sweet_fermentation_stage
+4123,KB-R6-045,8,4.2,7.9,26.89,79.04,balanced,too_early,0.8447959040140004,manual_check,R10_balanced_ready_window

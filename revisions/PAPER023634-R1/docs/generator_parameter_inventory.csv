@@ -1,0 +1,19 @@
+parameter,code_value,source_repo_path
+seed / count,RandomState=42; 7 recipe profiles × 50 batches × 14 days,src/config.py; src/generate_dataset.py
+sugar amount (g/L),"Normal(recipe target, SD=4)",src/generate_dataset.py
+starter amount (mL),"Normal(recipe target, SD=12)",src/generate_dataset.py
+base temperature (°C),"Normal(mean=25, SD=2)",src/generate_dataset.py
+temperature spike,"Probability=0.06 per batch; if triggered reset base temperature to Normal(mean=31, SD=1)",src/generate_dataset.py
+daily temperature,"base temperature + Normal(0, SD=0.75); clip [15,35]",src/generate_dataset.py
+base humidity (%),"Normal(mean=68, SD=7)",src/generate_dataset.py
+daily humidity,"base humidity + Normal(0, SD=4); clip [40,90]",src/generate_dataset.py
+initial pH,"Normal(mean=4.65, SD=0.18)",src/generate_dataset.py
+initial Brix,"sugar_actual/8 + Normal(0, SD=0.6); clip [6,14]",src/generate_dataset.py
+daily pH,"initial_pH - pH_drop_rate × day + Normal(0, SD=0.07); clip [2.4,5.0]",src/generate_dataset.py
+daily Brix,"initial_Brix - Brix_drop_rate × day + Normal(0, SD=0.30); clip [1.5,14]",src/generate_dataset.py
+"normal profile (R1,R4,R7)","pH rate Uniform[0.10,0.15]; Brix rate Uniform[0.38,0.55]",src/generate_dataset.py
+sweet profile (R2),"pH rate Uniform[0.10,0.15]; Brix rate Uniform[0.35,0.50]",src/generate_dataset.py
+low-sugar profile (R3),"pH rate Uniform[0.11,0.16]; Brix rate Uniform[0.45,0.65]",src/generate_dataset.py
+fast profile (R5),"pH rate Uniform[0.15,0.21]×1.15; Brix rate Uniform[0.55,0.80]×1.12",src/generate_dataset.py
+slow profile (R6),"pH rate Uniform[0.06,0.10]×0.85; Brix rate Uniform[0.22,0.36]×0.88",src/generate_dataset.py
+observation rounding,raw feature columns rounded to 2 decimals at storage,src/generate_dataset.py

@@ -1,0 +1,20 @@
+{
+  "n_rows": 4900,
+  "n_batches": 350,
+  "seeds": [42,43,44,45,46,47,48,49,50,51],
+  "model_random_state_fixed": 42,
+  "n_splits": 10,
+  "classification_ground_truth": "deterministic rule-generated labels; no independent biological ground truth",
+  "mcnemar_seed42": {
+    "both_correct": 974,
+    "gradient_boosting_only_correct": 2,
+    "random_forest_only_correct": 1,
+    "both_wrong": 3,
+    "p_exact": 1.0
+  },
+  "scikit_learn_version": "1.8.0",
+  "numpy_version": "2.3.5",
+  "pandas_version": "2.2.3",
+  "python_version": "3.13.5",
+  "note": "Repeated test sets overlap across random seeds; results describe split sensitivity, not independent external validation."
+}
