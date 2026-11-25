@@ -1,0 +1,46 @@
+{
+  "run_id": "SWB-9966afb54ac6-",
+  "started_utc": "2026-11-25T07:36:14.208388+00:00",
+  "broker": "broker.emqx.io",
+  "port": 1883,
+  "topic": "scobywatch/panji/sensor",
+  "qos": 0,
+  "attempted": 300,
+  "locally_published": 300,
+  "local_publish_failures": 0,
+  "unique_node_red_ingress": 300,
+  "unique_dashboard_receipts": 201,
+  "mqtt_ingress_missing_pct": 0.0,
+  "dashboard_missing_pct": 33.0,
+  "ingress_duplicates": 0,
+  "dashboard_duplicates": 0,
+  "interval_s": 0.2,
+  "offered_rate_messages_per_s": 5.0,
+  "drain_s": 15,
+  "python": "3.12.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "publisher": "Python replay on same PC, not Wokwi ESP32",
+  "measurement": "Host wall-clock publisher to parsed MQTT ingress and browser instrumented widget receipt; not all widget rendering",
+  "ingress_latency": {
+    "n": 300,
+    "negative_count": 0,
+    "p50_ms": 317.751,
+    "p95_ms": 399.319,
+    "p99_ms": 434.748
+  },
+  "dashboard_latency": {
+    "n": 201,
+    "negative_count": 0,
+    "p50_ms": 7964.781,
+    "p95_ms": 18792.653,
+    "p99_ms": 20308.941
+  },
+  "node_red_to_dashboard_latency": {
+    "n": 201,
+    "negative_count": 0,
+    "p50_ms": 7709.0,
+    "p95_ms": 18568.0,
+    "p99_ms": 20044.0
+  },
+  "observed_dashboard_completion_rate_messages_per_s": 3.3061
+}

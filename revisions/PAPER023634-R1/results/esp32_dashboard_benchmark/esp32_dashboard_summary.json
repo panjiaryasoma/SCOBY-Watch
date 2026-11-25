@@ -1,0 +1,65 @@
+{
+  "started_utc": "2026-11-25T13:38:33.746943+00:00",
+  "run_id": "3e1b6295",
+  "publisher": "Wokwi simulated ESP32, host epoch estimated via MQTT clock exchange",
+  "expected_messages": 100,
+  "firmware_finish": {
+    "attempted": 100,
+    "local_publish_ok": 100,
+    "clock_end_ok": true
+  },
+  "node_red_ingress": 100,
+  "dashboard_receipts": 100,
+  "ingress_missing_pct_of_expected": 0.0,
+  "dashboard_missing_pct_of_expected": 0.0,
+  "ingress_missing_pct_of_local_publish_ok": 0.0,
+  "dashboard_missing_pct_of_local_publish_ok": 0.0,
+  "clock_offset_checks": {
+    "start": {
+      "esp_send_ms": 1795613995296,
+      "host_receive_ms": 1795613995621,
+      "host_send_ms": 1795613995621,
+      "esp_receive_ms": 1795613995989,
+      "offset_lower_ms": -368,
+      "offset_upper_ms": 325,
+      "offset_interval_width_ms": 693,
+      "zero_within_bounds": true
+    },
+    "end": {
+      "esp_send_ms": 1795614297543,
+      "host_receive_ms": 1795614338834,
+      "host_send_ms": 1795614338834,
+      "esp_receive_ms": 1795614298237,
+      "offset_lower_ms": 40597,
+      "offset_upper_ms": 41291,
+      "offset_interval_width_ms": 694,
+      "zero_within_bounds": false
+    }
+  },
+  "zero_offset_plausible_at_start_and_end": false,
+  "latency": {
+    "esp_to_ingress_estimate_ms": {
+      "n": 100,
+      "negative_count": 0,
+      "p50_ms": 38531.5,
+      "p95_ms": 40992.5,
+      "p99_ms": 41095.45
+    },
+    "esp_to_dashboard_estimate_ms": {
+      "n": 100,
+      "negative_count": 0,
+      "p50_ms": 38596.5,
+      "p95_ms": 41037.9,
+      "p99_ms": 41848.1
+    },
+    "ingress_to_dashboard_ms": {
+      "n": 100,
+      "negative_count": 0,
+      "p50_ms": 10.0,
+      "p95_ms": 45.7,
+      "p99_ms": 1514.31
+    }
+  },
+  "drain_seconds_after_finish": 20,
+  "measurement": "ESP32 estimated host-epoch timestamp immediately before payload serialization/publish to Node-RED parsed ingress or instrumented browser widget receipt; not whole dashboard rendering. One-way estimates include residual clock offset and simulation-clock drift. Clock probes bound offset only at probe times under nonnegative transit assumptions; not a calibration of every sample. Missing receipts are within observation window."
+}
