@@ -1,0 +1,871 @@
+[
+  {
+    "id": "4754c21c18e3aa6a",
+    "type": "tab",
+    "label": "SCOBY Watch Flask Hybrid",
+    "disabled": false,
+    "info": "SCOBY Watch Wokwi + MQTT + Node-RED + Flask ML Hybrid API flow.\nRun Flask API on http://127.0.0.1:5000 before deploying this flow.",
+    "env": []
+  },
+  {
+    "id": "05c6a56ced32977d",
+    "type": "inject",
+    "z": "4754c21c18e3aa6a",
+    "name": "Manual Balanced Test Payload",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "{\"batch_id\": \"KB-WOKWI-001\", \"recipe_id\": \"R1\", \"tea_type\": \"black_tea\", \"sugar_g_per_l\": 80, \"starter_ml\": 150, \"water_volume_l\": 1.0, \"day\": 7, \"room_temp_c\": 24.4, \"humidity_percent\": 91.5, \"ph\": 3.56, \"brix\": 7.71}",
+    "payloadType": "json",
+    "x": 170,
+    "y": 80,
+    "wires": [
+      [
+        "8ecd22c82c0e49a7"
+      ]
+    ]
+  },
+  {
+    "id": "e5d8ae7baa3d0574",
+    "type": "mqtt in",
+    "z": "4754c21c18e3aa6a",
+    "name": "MQTT In - SCOBY Watch",
+    "topic": "scobywatch/panji/sensor",
+    "qos": "0",
+    "datatype": "auto-detect",
+    "broker": "8191bbb6eef32292",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 170,
+    "y": 150,
+    "wires": [
+      [
+        "8ecd22c82c0e49a7"
+      ]
+    ]
+  },
+  {
+    "id": "8ecd22c82c0e49a7",
+    "type": "json",
+    "z": "4754c21c18e3aa6a",
+    "name": "JSON Parser",
+    "property": "payload",
+    "action": "obj",
+    "pretty": false,
+    "x": 420,
+    "y": 120,
+    "wires": [
+      [
+        "5374f10cf6d33b21",
+        "1cb3b03c3cb19db6",
+        "b5ca000000000001"
+      ]
+    ]
+  },
+  {
+    "id": "5374f10cf6d33b21",
+    "type": "debug",
+    "z": "4754c21c18e3aa6a",
+    "name": "Raw Sensor Payload",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 690,
+    "y": 60,
+    "wires": []
+  },
+  {
+    "id": "1cb3b03c3cb19db6",
+    "type": "function",
+    "z": "4754c21c18e3aa6a",
+    "name": "Prepare Flask API Request",
+    "func": "// Prepare request for local Flask ML Hybrid API\n// Make sure Flask is running at http://127.0.0.1:5000\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nmsg.method = \"POST\";\nmsg.url = \"http://127.0.0.1:5000/predict\";\n\n// HTTP request node sends the payload as request body\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 700,
+    "y": 140,
+    "wires": [
+      [
+        "d69f1eb23dfcc222"
+      ]
+    ]
+  },
+  {
+    "id": "d69f1eb23dfcc222",
+    "type": "http request",
+    "z": "4754c21c18e3aa6a",
+    "name": "POST /predict Flask API",
+    "method": "use",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 810,
+    "y": 260,
+    "wires": [
+      [
+        "1a2a74bc34139758",
+        "29d616431328088a",
+        "b5ca000000000002"
+      ]
+    ]
+  },
+  {
+    "id": "1a2a74bc34139758",
+    "type": "debug",
+    "z": "4754c21c18e3aa6a",
+    "name": "Flask API Hybrid Response",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1180,
+    "y": 380,
+    "wires": []
+  },
+  {
+    "id": "29d616431328088a",
+    "type": "function",
+    "z": "4754c21c18e3aa6a",
+    "name": "Split API Response to Dashboard",
+    "func": "let d = msg.payload;\n\n// If the HTTP Request node returns a JSON string, parse it.\nif (typeof d === \"string\") {\n    try {\n        d = JSON.parse(d);\n    } catch (err) {\n        node.error(\"Invalid API response JSON: \" + err.message, msg);\n        return null;\n    }\n}\n\nfunction safeNumber(value, fallback = 0) {\n    const n = Number(value);\n    return Number.isFinite(n) ? n : fallback;\n}\n\nfunction safeText(value, fallback = \"N/A\") {\n    return value === undefined || value === null || value === \"\" ? fallback : String(value);\n}\n\nconst mlConfidence = d.ml_confidence !== undefined && d.ml_confidence !== null\n    ? Number(d.ml_confidence).toFixed(4)\n    : \"N/A\";\n\nreturn [\n    { payload: safeNumber(d.room_temp_c), topic: \"Temperature\" },\n    { payload: safeNumber(d.room_temp_c), topic: \"Temperature\" },\n\n    { payload: safeNumber(d.humidity_percent), topic: \"Humidity\" },\n    { payload: safeNumber(d.humidity_percent), topic: \"Humidity\" },\n\n    { payload: safeNumber(d.ph), topic: \"pH\" },\n    { payload: safeNumber(d.ph), topic: \"pH\" },\n\n    { payload: safeNumber(d.brix), topic: \"Brix\" },\n    { payload: safeNumber(d.brix), topic: \"Brix\" },\n\n    { payload: safeText(d.batch_id) },\n    { payload: safeText(d.recipe_id) + \" / \" + safeText(d.tea_type) },\n    { payload: safeText(d.day) },\n\n    { payload: safeText(d.rule_status) },\n    { payload: safeText(d.ml_status) },\n    { payload: mlConfidence },\n    { payload: safeText(d.final_status) },\n    { payload: safeText(d.risk_flag) },\n    { payload: safeText(d.rule_triggered) },\n    { payload: safeText(d.decision_reason) },\n    { payload: safeText(d.recommendation) },\n\n    { payload: d }\n];",
+    "outputs": 20,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1260,
+    "y": 160,
+    "wires": [
+      [
+        "59df98033b9280a1"
+      ],
+      [
+        "a40ddd113b8b20e8"
+      ],
+      [
+        "1c5e21281ba81e3b"
+      ],
+      [
+        "23c235eb95a9b4e0"
+      ],
+      [
+        "dfa3cf648af8047a"
+      ],
+      [
+        "bac4da4379026390"
+      ],
+      [
+        "5353afe203160250"
+      ],
+      [
+        "8fbc6be56e7be3e0"
+      ],
+      [
+        "9b0ca5c7cf2bad30"
+      ],
+      [
+        "0ac94bbb2f4ebe1d"
+      ],
+      [
+        "879c7354ccdd0148"
+      ],
+      [
+        "65bee986cae1fce3"
+      ],
+      [
+        "b41b485aba03ea66"
+      ],
+      [
+        "8544d357ca95e17d"
+      ],
+      [
+        "68f96d09e54d9ce5"
+      ],
+      [
+        "bf9979312eb9baa0"
+      ],
+      [
+        "783d2085f1f62f8c"
+      ],
+      [
+        "ce26eac6468982fb"
+      ],
+      [
+        "167eb6d5755796e9"
+      ],
+      [
+        "1a2a74bc34139758"
+      ]
+    ]
+  },
+  {
+    "id": "59df98033b9280a1",
+    "type": "ui_gauge",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "12bd0d5d70fd4fb1",
+    "order": 1,
+    "width": 6,
+    "height": 4,
+    "gtype": "gage",
+    "title": "Temperature",
+    "label": "°C",
+    "format": "{{value}}",
+    "min": "0",
+    "max": "50",
+    "colors": [
+      "#ca3838",
+      "#00b500",
+      "#ca3838"
+    ],
+    "seg1": "18",
+    "seg2": "30",
+    "diff": false,
+    "className": "",
+    "x": 1530,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "1c5e21281ba81e3b",
+    "type": "ui_gauge",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "12bd0d5d70fd4fb1",
+    "order": 2,
+    "width": 6,
+    "height": 4,
+    "gtype": "gage",
+    "title": "Humidity",
+    "label": "%",
+    "format": "{{value}}",
+    "min": "0",
+    "max": "100",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "40",
+    "seg2": "80",
+    "diff": false,
+    "className": "",
+    "x": 1530,
+    "y": 80,
+    "wires": []
+  },
+  {
+    "id": "dfa3cf648af8047a",
+    "type": "ui_gauge",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "12bd0d5d70fd4fb1",
+    "order": 3,
+    "width": 6,
+    "height": 4,
+    "gtype": "gage",
+    "title": "pH",
+    "label": "pH",
+    "format": "{{value}}",
+    "min": "2.4",
+    "max": "5.0",
+    "colors": [
+      "#ca3838",
+      "#00b500",
+      "#e6e600"
+    ],
+    "seg1": "3.0",
+    "seg2": "4.2",
+    "diff": false,
+    "className": "",
+    "x": 1510,
+    "y": 120,
+    "wires": []
+  },
+  {
+    "id": "5353afe203160250",
+    "type": "ui_gauge",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "12bd0d5d70fd4fb1",
+    "order": 4,
+    "width": 6,
+    "height": 4,
+    "gtype": "gage",
+    "title": "Brix",
+    "label": "°Bx",
+    "format": "{{value}}",
+    "min": "1.5",
+    "max": "14.0",
+    "colors": [
+      "#ca3838",
+      "#00b500",
+      "#e6e600"
+    ],
+    "seg1": "5",
+    "seg2": "8",
+    "diff": false,
+    "className": "",
+    "x": 1510,
+    "y": 160,
+    "wires": []
+  },
+  {
+    "id": "a40ddd113b8b20e8",
+    "type": "ui_chart",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "a6fb77c7baf4419e",
+    "order": 1,
+    "width": 6,
+    "height": 4,
+    "label": "Temperature Trend",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "50",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "useUTC": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "outputs": 1,
+    "useDifferentColor": false,
+    "className": "",
+    "x": 1530,
+    "y": 240,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "23c235eb95a9b4e0",
+    "type": "ui_chart",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "a6fb77c7baf4419e",
+    "order": 2,
+    "width": 6,
+    "height": 4,
+    "label": "Humidity Trend",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "0",
+    "ymax": "100",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "useUTC": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "outputs": 1,
+    "useDifferentColor": false,
+    "className": "",
+    "x": 1530,
+    "y": 300,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "bac4da4379026390",
+    "type": "ui_chart",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "a6fb77c7baf4419e",
+    "order": 3,
+    "width": 6,
+    "height": 4,
+    "label": "pH Trend",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "2.4",
+    "ymax": "5",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "useUTC": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "outputs": 1,
+    "useDifferentColor": false,
+    "className": "",
+    "x": 1510,
+    "y": 360,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "8fbc6be56e7be3e0",
+    "type": "ui_chart",
+    "z": "4754c21c18e3aa6a",
+    "name": "",
+    "group": "a6fb77c7baf4419e",
+    "order": 4,
+    "width": 6,
+    "height": 4,
+    "label": "Brix Trend",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "1.5",
+    "ymax": "14",
+    "removeOlder": 1,
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "useUTC": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "outputs": 1,
+    "useDifferentColor": false,
+    "className": "",
+    "x": 1510,
+    "y": 420,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "9b0ca5c7cf2bad30",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 1,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "Batch ID",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1530,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "0ac94bbb2f4ebe1d",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 2,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "Recipe",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1530,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "879c7354ccdd0148",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 3,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "Fermentation Day",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1550,
+    "y": 580,
+    "wires": []
+  },
+  {
+    "id": "65bee986cae1fce3",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 4,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "Rule Status",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1540,
+    "y": 620,
+    "wires": []
+  },
+  {
+    "id": "b41b485aba03ea66",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 5,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "ML Status",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1530,
+    "y": 660,
+    "wires": []
+  },
+  {
+    "id": "8544d357ca95e17d",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 6,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "ML Confidence",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1540,
+    "y": 700,
+    "wires": []
+  },
+  {
+    "id": "68f96d09e54d9ce5",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 7,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "Final Status",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1540,
+    "y": 740,
+    "wires": []
+  },
+  {
+    "id": "bf9979312eb9baa0",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 8,
+    "width": 6,
+    "height": 1,
+    "name": "",
+    "label": "Risk Flag",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1530,
+    "y": 780,
+    "wires": []
+  },
+  {
+    "id": "783d2085f1f62f8c",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 9,
+    "width": 12,
+    "height": 1,
+    "name": "",
+    "label": "Rule Triggered",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1550,
+    "y": 820,
+    "wires": []
+  },
+  {
+    "id": "ce26eac6468982fb",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 10,
+    "width": 12,
+    "height": 1,
+    "name": "",
+    "label": "Decision Reason",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1550,
+    "y": 860,
+    "wires": []
+  },
+  {
+    "id": "167eb6d5755796e9",
+    "type": "ui_text",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "order": 11,
+    "width": 12,
+    "height": 1,
+    "name": "",
+    "label": "Recommendation",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "className": "",
+    "x": 1550,
+    "y": 900,
+    "wires": []
+  },
+  {
+    "id": "8191bbb6eef32292",
+    "type": "mqtt-broker",
+    "name": "EMQX Public",
+    "broker": "broker.emqx.io",
+    "port": 1883,
+    "clientid": "",
+    "autoConnect": true,
+    "usetls": false,
+    "protocolVersion": 4,
+    "keepalive": 60,
+    "cleansession": true,
+    "autoUnsubscribe": true,
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthRetain": "false",
+    "birthPayload": "",
+    "birthMsg": {},
+    "closeTopic": "",
+    "closeQos": "0",
+    "closeRetain": "false",
+    "closePayload": "",
+    "closeMsg": {},
+    "willTopic": "",
+    "willQos": "0",
+    "willRetain": "false",
+    "willPayload": "",
+    "willMsg": {},
+    "userProps": "",
+    "sessionExpiry": ""
+  },
+  {
+    "id": "12bd0d5d70fd4fb1",
+    "type": "ui_group",
+    "name": "Sensor Monitoring",
+    "tab": "0c0af123d769a233",
+    "order": 1,
+    "disp": true,
+    "width": 12,
+    "collapse": false,
+    "className": ""
+  },
+  {
+    "id": "a6fb77c7baf4419e",
+    "type": "ui_group",
+    "name": "Trends",
+    "tab": "0c0af123d769a233",
+    "order": 3,
+    "disp": true,
+    "width": 12,
+    "collapse": false,
+    "className": ""
+  },
+  {
+    "id": "d7237d99dc1d952b",
+    "type": "ui_group",
+    "name": "Hybrid Decision Support",
+    "tab": "0c0af123d769a233",
+    "order": 2,
+    "disp": true,
+    "width": 12,
+    "collapse": false,
+    "className": ""
+  },
+  {
+    "id": "0c0af123d769a233",
+    "type": "ui_tab",
+    "name": "SCOBY Watch Hybrid",
+    "icon": "dashboard",
+    "disabled": false,
+    "hidden": false
+  },
+  {
+    "id": "5c6b9d8bc8b932bc",
+    "type": "global-config",
+    "env": [],
+    "modules": {
+      "node-red-dashboard": "3.6.6"
+    }
+  },
+  {
+    "id": "b5ca000000000001",
+    "type": "function",
+    "z": "4754c21c18e3aa6a",
+    "name": "BENCH 1 - MQTT ingress",
+    "func": "let d=msg.payload; if(typeof d==='string'){try{d=JSON.parse(d)}catch(e){return null;}}\nif(!d || typeof d.batch_id!=='string' || !d.batch_id.startsWith('SWB-')) return null;\nreturn {payload:JSON.stringify({stage:'ingress',batch_id:d.batch_id,ts_ms:Date.now()}),headers:{'Content-Type':'application/json'}};",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 380,
+    "y": 1040,
+    "wires": [
+      [
+        "b5ca000000000004"
+      ]
+    ]
+  },
+  {
+    "id": "b5ca000000000002",
+    "type": "ui_template",
+    "z": "4754c21c18e3aa6a",
+    "group": "d7237d99dc1d952b",
+    "name": "BENCH 2 - Dashboard receipt",
+    "order": 99,
+    "width": 12,
+    "height": 1,
+    "format": "<div>Benchmark receipt: {{msg.payload.batch_id}}</div>\n<script>(function(scope){var seen={};scope.$watch('msg',function(msg){if(!msg||!msg.payload)return;var d=msg.payload;if(typeof d.batch_id!=='string'||d.batch_id.indexOf('SWB-')!==0||!d.final_status||seen[d.batch_id])return;seen[d.batch_id]=true;var ts=Date.now();scope.send({payload:{stage:'dashboard',batch_id:d.batch_id,ts_ms:ts}});});})(scope);</script>",
+    "storeOutMessages": false,
+    "fwdInMessages": false,
+    "resendOnRefresh": false,
+    "templateScope": "local",
+    "className": "",
+    "x": 700,
+    "y": 1100,
+    "wires": [
+      [
+        "b5ca000000000003"
+      ]
+    ]
+  },
+  {
+    "id": "b5ca000000000003",
+    "type": "function",
+    "z": "4754c21c18e3aa6a",
+    "name": "BENCH 3 - Dashboard callback",
+    "func": "let d=msg.payload;if(!d||d.stage!=='dashboard'||typeof d.batch_id!=='string'||!d.batch_id.startsWith('SWB-'))return null;return {payload:JSON.stringify(d),headers:{'Content-Type':'application/json'}};",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 990,
+    "y": 1100,
+    "wires": [
+      [
+        "b5ca000000000004"
+      ]
+    ]
+  },
+  {
+    "id": "b5ca000000000004",
+    "type": "http request",
+    "z": "4754c21c18e3aa6a",
+    "name": "BENCH 4 - Local collector",
+    "method": "POST",
+    "ret": "txt",
+    "paytoqs": "ignore",
+    "url": "http://127.0.0.1:8765/event",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 1250,
+    "y": 1040,
+    "wires": [
+      []
+    ]
+  }
+]
